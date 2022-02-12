@@ -2,14 +2,14 @@
 import { Auth, getUser } from './auth';
 
 // modifications to src/app.js
-import { getUserFragments } from './api';
+import { getUserFragments, postUserFragments } from './api';
 
 async function init() {
   // Get our UI elements
   const userSection = document.querySelector('#user');
   const loginBtn = document.querySelector('#login');
   const logoutBtn = document.querySelector('#logout');
-
+  const postSection = document.querySelector('#post');
   // Wire up event handlers to deal with login and logout.
   loginBtn.onclick = () => {
     // Sign-in via the Amazon Cognito Hosted UI (requires redirects), see:
@@ -30,19 +30,21 @@ async function init() {
     return;
   }
   getUserFragments(user);
-  
+  postUserFragments();
   // Log the user info for debugging purposes
   console.log({ user });
 
   // Update the UI to welcome the user
   userSection.hidden = false;
-
+  
   // Show the user's username
   userSection.querySelector('.username').innerText = user.username;
 
   // Disable the Login button
   loginBtn.disabled = true;
-
+  if(loginBtn.disabled = true){
+    postSection.hidden = false;
+  }
   
 }
 
