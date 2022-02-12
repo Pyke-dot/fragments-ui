@@ -1,5 +1,4 @@
 // src/app.js
-
 import { Auth, getUser } from './auth';
 
 // modifications to src/app.js
@@ -10,8 +9,6 @@ async function init() {
   const userSection = document.querySelector('#user');
   const loginBtn = document.querySelector('#login');
   const logoutBtn = document.querySelector('#logout');
-
-  
 
   // Wire up event handlers to deal with login and logout.
   loginBtn.onclick = () => {
@@ -32,7 +29,8 @@ async function init() {
     logoutBtn.disabled = true;
     return;
   }
-
+  getUserFragments(user);
+  
   // Log the user info for debugging purposes
   console.log({ user });
 
@@ -45,7 +43,7 @@ async function init() {
   // Disable the Login button
   loginBtn.disabled = true;
 
-  getUserFragments(user);
+  
 }
 
 // Wait for the DOM to be ready, then start the app
