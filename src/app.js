@@ -2,14 +2,18 @@
 import { Auth, getUser } from './auth';
 
 // modifications to src/app.js
-import { getUserFragments } from './api';
+import { getUserFragmentList, getUserFragments, postUserFragments, getUserDataById } from './api';
 
 async function init() {
   // Get our UI elements
   const userSection = document.querySelector('#user');
   const loginBtn = document.querySelector('#login');
   const logoutBtn = document.querySelector('#logout');
-
+  const postSection = document.querySelector('#post');
+  const postBTN = document.querySelector('#postBtn');
+  const getBTN = document.querySelector('#getBtn');
+  const getListBTN = document.querySelector('#getListBtn');
+  const getByIdBTN = document.querySelector('#getByIdBtn');
   // Wire up event handlers to deal with login and logout.
   loginBtn.onclick = () => {
     // Sign-in via the Amazon Cognito Hosted UI (requires redirects), see:
@@ -29,20 +33,40 @@ async function init() {
     logoutBtn.disabled = true;
     return;
   }
-  getUserFragments(user);
+
+  postBTN.onclick = () => {
+    let data = document.querySelector('#data').value;
+    postUserFragments(user,data);
+  }
+  getBTN.onclick = () => {
+    getUserFragments(user);
+  }
+  getListBTN.onclick = () => {
+    getUserFragmentList(user);
+  }
+  
+  getByIdBTN.onclick = () => {
+    let id = document.querySelector('#data').value
+    
+    getUserDataById(user,id);
+  }
+  // getUserFragments(user);
+  
   
   // Log the user info for debugging purposes
   console.log({ user });
 
   // Update the UI to welcome the user
   userSection.hidden = false;
-
+  
   // Show the user's username
-  userSection.querySelector('.username').innerText = user.username;
+  userSection.querySelector('.username').innerHTML = user.username;
 
   // Disable the Login button
   loginBtn.disabled = true;
-
+  if(loginBtn.disabled = true){
+    postSection.hidden = false;
+  }
   
 }
 
