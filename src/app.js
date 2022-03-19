@@ -2,7 +2,7 @@
 import { Auth, getUser } from './auth';
 
 // modifications to src/app.js
-import { getUserFragmentList, getUserFragments, postUserFragments, getUserDataById } from './api';
+import { getUserFragmentList, getUserFragments, postUserFragments, getFragmentDataById, getFragmentInfo } from './api';
 
 async function init() {
   // Get our UI elements
@@ -14,6 +14,7 @@ async function init() {
   const getBTN = document.querySelector('#getBtn');
   const getListBTN = document.querySelector('#getListBtn');
   const getByIdBTN = document.querySelector('#getByIdBtn');
+  const getInfoBTN = document.querySelector('#getInfoBtn');
   // Wire up event handlers to deal with login and logout.
   loginBtn.onclick = () => {
     // Sign-in via the Amazon Cognito Hosted UI (requires redirects), see:
@@ -27,6 +28,7 @@ async function init() {
   };
 
   // See if we're signed in (i.e., we'll have a `user` object)
+  
   const user = await getUser();
   if (!user) {
     // Disable the Logout button
@@ -36,7 +38,9 @@ async function init() {
 
   postBTN.onclick = () => {
     let data = document.querySelector('#data').value;
-    postUserFragments(user,data);
+    let type = document.querySelector('#types').value;
+    console.log(type);
+    postUserFragments(user,data,type);
   }
   getBTN.onclick = () => {
     getUserFragments(user);
@@ -46,11 +50,14 @@ async function init() {
   }
   
   getByIdBTN.onclick = () => {
-    let id = document.querySelector('#data').value
+    let id = document.querySelector('#id').value
+    getFragmentDataById(user,id);
     
-    getUserDataById(user,id);
   }
-  // getUserFragments(user);
+  getInfoBTN.onclick = () => {
+  let id = document.querySelector('#id').value
+  getFragmentInfo(user,id);
+ }
   
   
   // Log the user info for debugging purposes
