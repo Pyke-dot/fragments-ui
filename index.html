@@ -16,7 +16,6 @@
       <h2>Hello <span class="username"></span>!</h2>
     </section>
     <section hidden id="post">
-      
       <label>Choose a type for the fragment you wish to POST:
         <select name="types" id="types" required>
           <option value="application/json">application/json</option>
@@ -27,17 +26,26 @@
         <hr>
       <textarea type="text" id="data"></textarea>
       <button type="submit" id="postBtn"> POST </button>
-     
+      <button type="submit" id="updateBtn"> UPDATE </button>
       <button type="submit" id="getBtn"> GET FRAGMENT </button>
       <button type="submit" id="getListBtn"> GET FRAGMENT EXPAND </button>
 
       <input type="text" id="id">
       <button type="submit" id="getByIdBtn"> GET Data</button>
       <button type="submit" id="getInfoBtn"> GET Metadata</button>
-    <div id="dataBack"></div>
+      <button type="submit" id="deleteBtn"> DELETE Fragment</button>
+
+      <input type="file" name="file" id="file">
+      <button name="submit" id="uploadBtn">Upload image File</button>
+      <button name="submit" id="updateImageBtn">Update image File</button>
+     
+      <label>Fragment data got back:</label>
+      <div id="dataBack"></div>
+      <img id="image">
 
     </section>
   </body>
   
- 
+  
+  
 </html>
